@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">WeatherWise</string>
+    <string name="title_activity_main">WeatherWise</string>
+    <string name="package_name">pk.weatherwise.app</string>
+    <string name="custom_url_scheme">pk.weatherwise.app</string>
+</resources>

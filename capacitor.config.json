@@ -1,0 +1,5 @@
+{
+  "appId": "pk.weatherwise.app",
+  "appName": "WeatherWise",
+  "webDir": "dist"
+}
