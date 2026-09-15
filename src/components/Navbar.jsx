@@ -2,17 +2,16 @@
 // NAVBAR COMPONENT - FULLY FIXED
 // Install Button: Auto-Hide When Installed
 // Menu Button: Native App OR Mobile Screen
+// REMOVED: Theme toggle (moved to Settings)
 // ==========================================
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useSettings } from '../context/SettingsContext';
 import { useWeather } from '../context/WeatherContext';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 
 const Navbar = () => {
   const location = useLocation();
-  const { theme, toggleTheme } = useSettings();
   const { currentCity } = useWeather();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -103,6 +102,9 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  // Check if current page is Settings
+  const isSettingsPage = location.pathname === '/settings';
+
   return (
     <>
       <header
@@ -116,18 +118,11 @@ const Navbar = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: 'clamp(8px, 2vw, 10px) clamp(12px, 3vw, 20px)',
-          background:
-            theme === 'dark'
-              ? 'rgba(10,10,18,0.7)'
-              : 'rgba(255,255,255,0.6)',
+          background: 'rgba(255,255,255,0.6)',
           backdropFilter: 'blur(25px)',
           WebkitBackdropFilter: 'blur(25px)',
           borderRadius: '20px',
-          border: `1px solid ${
-            theme === 'dark'
-              ? 'rgba(255,255,255,0.06)'
-              : 'rgba(0,0,0,0.06)'
-          }`,
+          border: '1px solid rgba(0,0,0,0.06)',
           marginBottom: '20px',
           gap: '10px',
           transition: 'all 0.4s ease',
@@ -207,12 +202,12 @@ const Navbar = () => {
                 fontSize: '11px',
                 background: isInstallable
                   ? 'linear-gradient(135deg, #6366f1, #8b5cf6)'
-                  : 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                  : 'rgba(0,0,0,0.05)',
+                border: '1px solid rgba(0,0,0,0.08)',
                 borderRadius: '9999px',
                 color: isInstallable
                   ? '#fff'
-                  : 'rgba(255,255,255,0.5)',
+                  : 'rgba(0,0,0,0.5)',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 fontWeight: 600,
@@ -266,11 +261,7 @@ const Navbar = () => {
                 fontWeight: 500,
                 color:
                   location.pathname === link.path
-                    ? theme === 'dark'
-                      ? '#ffffff'
-                      : '#1a1a2e'
-                    : theme === 'dark'
-                    ? 'rgba(255,255,255,0.4)'
+                    ? '#1a1a2e'
                     : 'rgba(0,0,0,0.4)',
                 borderRadius: '9999px',
                 textDecoration: 'none',
@@ -295,37 +286,6 @@ const Navbar = () => {
             alignItems: 'center',
           }}
         >
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="theme-btn"
-            type="button"
-            aria-label="Toggle theme"
-            style={{
-              width: '38px',
-              height: '38px',
-              minWidth: '38px',
-              maxWidth: '38px',
-              minHeight: '38px',
-              maxHeight: '38px',
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'rgba(255,255,255,0.4)',
-              cursor: 'pointer',
-              transition: 'all 0.5s ease',
-              fontSize: '16px',
-              flexShrink: 0,
-              aspectRatio: '1 / 1',
-              padding: 0,
-            }}
-          >
-            {theme === 'dark' ? '🌙' : '☀️'}
-          </button>
-
           {/* ===== MENU BUTTON ===== */}
           {isMobileOrNative && (
             <button
@@ -344,8 +304,8 @@ const Navbar = () => {
                 maxWidth: '38px',
                 minHeight: '38px',
                 maxHeight: '38px',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.06)',
+                background: 'rgba(0,0,0,0.03)',
+                border: '1px solid rgba(0,0,0,0.06)',
                 borderRadius: '50%',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -358,7 +318,7 @@ const Navbar = () => {
                 style={{
                   width: '20px',
                   height: '2px',
-                  background: 'rgba(255,255,255,0.6)',
+                  background: 'rgba(0,0,0,0.6)',
                   borderRadius: '9999px',
                   transition: 'all 0.3s ease',
                 }}
@@ -367,7 +327,7 @@ const Navbar = () => {
                 style={{
                   width: '20px',
                   height: '2px',
-                  background: 'rgba(255,255,255,0.6)',
+                  background: 'rgba(0,0,0,0.6)',
                   borderRadius: '9999px',
                   transition: 'all 0.3s ease',
                 }}
@@ -376,7 +336,7 @@ const Navbar = () => {
                 style={{
                   width: '20px',
                   height: '2px',
-                  background: 'rgba(255,255,255,0.6)',
+                  background: 'rgba(0,0,0,0.6)',
                   borderRadius: '9999px',
                   transition: 'all 0.3s ease',
                 }}
@@ -397,10 +357,7 @@ const Navbar = () => {
             right: 0,
             bottom: 0,
             zIndex: 99,
-            background:
-              theme === 'dark'
-                ? 'rgba(10,10,18,0.95)'
-                : 'rgba(245,243,255,0.95)',
+            background: 'rgba(245,243,255,0.95)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
             padding: '30px',
@@ -422,11 +379,7 @@ const Navbar = () => {
                 fontWeight: 500,
                 color:
                   location.pathname === link.path
-                    ? theme === 'dark'
-                      ? '#ffffff'
-                      : '#1a1a2e'
-                    : theme === 'dark'
-                    ? 'rgba(255,255,255,0.6)'
+                    ? '#1a1a2e'
                     : 'rgba(0,0,0,0.6)',
                 textDecoration: 'none',
                 transition: 'all 0.3s ease',
@@ -443,11 +396,7 @@ const Navbar = () => {
           <hr
             style={{
               border: 'none',
-              borderTop: `1px solid ${
-                theme === 'dark'
-                  ? 'rgba(255,255,255,0.05)'
-                  : 'rgba(0,0,0,0.05)'
-              }`,
+              borderTop: '1px solid rgba(0,0,0,0.05)',
               margin: '12px 0',
             }}
           />
@@ -461,10 +410,7 @@ const Navbar = () => {
               borderRadius: '12px',
               fontSize: '16px',
               fontWeight: 500,
-              color:
-                theme === 'dark'
-                  ? 'rgba(255,255,255,0.6)'
-                  : 'rgba(0,0,0,0.6)',
+              color: 'rgba(0,0,0,0.6)',
               textDecoration: 'none',
             }}
           >
@@ -480,10 +426,7 @@ const Navbar = () => {
               borderRadius: '12px',
               fontSize: '16px',
               fontWeight: 500,
-              color:
-                theme === 'dark'
-                  ? 'rgba(255,255,255,0.6)'
-                  : 'rgba(0,0,0,0.6)',
+              color: 'rgba(0,0,0,0.6)',
               textDecoration: 'none',
             }}
           >
