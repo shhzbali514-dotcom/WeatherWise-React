@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WeatherWise - Redirecting...</title>
+    <script>
+      // ==========================================
+      // GITHUB PAGES 404 REDIRECT
+      // Redirect to index.html with path
+      // ==========================================
+      (function () {
+        var path = window.location.pathname;
+        var basePath = '/WeatherWise-React/';
+
+        // Remove base path
+        if (path.startsWith(basePath)) {
+          path = path.slice(basePath.length);
+        }
+
+        // Redirect to index.html with ?/path
+        var redirectUrl =
+          basePath +
+          '?/' +
+          path +
+          window.location.search +
+          window.location.hash;
+
+        window.location.replace(redirectUrl);
+      })();
+    </script>
+  </head>
+  <body>
+    <p style="font-family: sans-serif; text-align: center; padding: 50px;">
+      Redirecting...
+    </p>
+  </body>
+</html>

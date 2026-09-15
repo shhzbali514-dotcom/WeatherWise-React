@@ -12,13 +12,34 @@
     <!-- Viewport -->
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"/>
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
+    />
 
     <!-- ✅ Theme Color -->
     <meta name="theme-color" content="#0f172a" />
 
     <!-- ✅ PWA Manifest -->
     <link rel="manifest" href="/WeatherWise-React/manifest.json" />
+
+    <!-- ==========================================
+         GITHUB PAGES 404 REDIRECT HANDLER
+         ========================================== -->
+    <script>
+      (function () {
+        var redirect = window.location.search;
+        if (redirect && redirect.startsWith('?/')) {
+          var path = redirect
+            .slice(2)
+            .replace(/&/g, '?')
+            .replace(/~and~/g, '&');
+          window.history.replaceState(
+            null,
+            null,
+            '/WeatherWise-React/' + path + window.location.hash
+          );
+        }
+      })();
+    </script>
 
     <!-- ==========================================
          PWA Meta Tags
