@@ -1,6 +1,7 @@
 // ==========================================
 // LOCATION CARD COMPONENT
 // FULLY FIXED: Pakistan = 1 time, Abroad = 2 times
+// FIXED: Theme switch glitch
 // ==========================================
 
 import React, { useState, useEffect, useMemo } from 'react';
@@ -77,10 +78,8 @@ const LocationCard = () => {
 
   // ==========================================
   // LOCAL TIME (City's timezone)
-  // Only used for ABROAD cities
   // ==========================================
   const localTimeStr = useMemo(() => {
-    // Method 1: IANA timezone (BEST)
     if (
       cityTimezone &&
       typeof cityTimezone === 'string' &&
@@ -101,7 +100,6 @@ const LocationCard = () => {
       }
     }
 
-    // Method 2: UTC offset fallback
     if (
       cityUtcOffset !== null &&
       cityUtcOffset !== undefined &&
@@ -121,7 +119,6 @@ const LocationCard = () => {
       });
     }
 
-    // Method 3: Browser time
     return currentTime.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
@@ -218,7 +215,6 @@ const LocationCard = () => {
     locationSubtitle = 'Worldwide';
   }
 
-  // Weather icon
   const weatherIcon = getWeatherIcon(condition);
 
   // ==========================================
@@ -302,7 +298,7 @@ const LocationCard = () => {
         }}
       >
         <div style={{ minWidth: 0, flex: 1 }}>
-          {/* City Name */}
+          {/* City Name — transition: none (fix glitch) */}
           <h1
             style={{
               fontSize: 'clamp(24px, 4vw, 32px)',
@@ -334,9 +330,7 @@ const LocationCard = () => {
             {locationSubtitle}
           </p>
 
-          {/* ==========================================
-              CLOCK — Pakistan vs Abroad
-          ========================================== */}
+          {/* CLOCK */}
           <div
             className="realtime-clock"
             style={{
@@ -349,7 +343,7 @@ const LocationCard = () => {
             }}
           >
             {isPak ? (
-              // ✅ PAKISTAN CITY — Sirf 1 time (PKT)
+              // Pakistan City — 1 time
               <div
                 style={{
                   display: 'flex',
@@ -385,9 +379,8 @@ const LocationCard = () => {
                 </span>
               </div>
             ) : (
-              // ✅ ABROAD CITY — 2 times (PKT + Local)
+              // Abroad City — 2 times
               <>
-                {/* Pakistan Time (Reference) */}
                 <div
                   style={{
                     display: 'flex',
@@ -422,7 +415,6 @@ const LocationCard = () => {
                   </span>
                 </div>
 
-                {/* Local Time (City's time) */}
                 <div
                   style={{
                     display: 'flex',
@@ -528,6 +520,7 @@ const LocationCard = () => {
             flexWrap: 'wrap',
           }}
         >
+          {/* Temperature — transition: none (fix glitch) */}
           <span
             className="temp-value"
             style={{
@@ -539,7 +532,7 @@ const LocationCard = () => {
               WebkitTextFillColor: 'transparent',
               cursor: 'pointer',
               lineHeight: 1,
-              transition: 'transform 0.3s ease',
+              transition: 'none', // ✅ FIX
             }}
             title="Double-click to toggle °C / °F"
           >
