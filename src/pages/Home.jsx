@@ -439,14 +439,16 @@ const Home = () => {
           background: rgba(255,255,255,0.7) !important;
         }
         [data-theme="light"] .location-card h1 {
-          background: linear-gradient(135deg, #1a1a2e 60%, rgba(26,26,46,0.5)) !important;
-          -webkit-background-clip: text !important;
-          -webkit-text-fill-color: transparent !important;
+  background: none !important;
+  color: #1a1a2e !important;
+  -webkit-text-fill-color: #1a1a2e !important;
+}
         }
         [data-theme="light"] .temp-value {
-          background: linear-gradient(135deg, #1a1a2e 50%, rgba(26,26,46,0.5)) !important;
-          -webkit-background-clip: text !important;
-          -webkit-text-fill-color: transparent !important;
+  background: none !important;
+  color: #1a1a2e !important;
+  -webkit-text-fill-color: #1a1a2e !important;
+}
         }
         [data-theme="light"] .stat-value,
         [data-theme="light"] .week-temp {
