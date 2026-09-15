@@ -87,10 +87,12 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <Router
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
+  basename="/WeatherWise-React"
+  future={{
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+  }}
+
     >
       <SettingsProvider>
         <WeatherProvider>
