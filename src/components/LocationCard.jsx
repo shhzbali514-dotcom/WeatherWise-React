@@ -311,6 +311,7 @@ const LocationCard = () => {
               background: gradientPrimary,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              transition: 'none',
               margin: 0,
               whiteSpace: 'nowrap',
               overflow: 'hidden',
@@ -538,7 +539,7 @@ const LocationCard = () => {
               WebkitTextFillColor: 'transparent',
               cursor: 'pointer',
               lineHeight: 1,
-              transition: 'all 0.3s ease',
+              transition: 'transform 0.3s ease',
             }}
             title="Double-click to toggle °C / °F"
           >
