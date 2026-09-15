@@ -19,7 +19,9 @@ if (
 ) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('/service-worker.js', { scope: '/' })
+      .register('/WeatherWise-React/service-worker.js', {
+              scope: '/WeatherWise-React/',
+            })
       .then((registration) => {
         console.log('✅ Service Worker registered successfully');
         console.log('📦 Scope:', registration.scope);
